@@ -1,0 +1,26 @@
+jenkins:
+  systemMessage: "Jenkins configured automatically by JCasC"
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "admin"
+
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+
+  jobs:
+    - script: >
+        pipelineJob('my-pipeline') {
+          definition {
+            cps {
+              script(readFileFromWorkspace('jobs/my-pipeline/pipeline.groovy'))
+              sandbox()
+            }
+          }
+        }
+
+  unclassified:
+    location:
+      url: "http://localhost:8080/"

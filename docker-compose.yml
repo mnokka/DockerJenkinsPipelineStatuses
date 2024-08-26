@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  jenkins:
+    build:
+      context: .  # Use the Dockerfile in the current directory
+    container_name: jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./project:/var/jenkins_home/workspace/my-pipeline  # Mount the directory containing hello.c and Jenkinsfile, in context of the job
+      - ./jenkins/casc_configs:/var/jenkins_home/casc_configs
+      - ./jenkins/jobs:/var/jenkins_home/jobs
+    environment:
+      JAVA_OPTS: -Djenkins.install.runSetupWizard=false  # Optional: Skips the setup wizard for testing purposes
+
+volumes:
+  jenkins_home:
