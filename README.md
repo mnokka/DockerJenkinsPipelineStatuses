@@ -11,3 +11,6 @@ Jenkins goes directly to admin state...
 Jenkins has pipeline job (for project/hello.c) defined, just hit Build button to build it (output hello will be tested(executed) and archived)
 
 
+
+failpipleine.groovy as an example how stage can check it's failure and set failure variable. Then final
+phase can inform which part of the build actually failed
